@@ -23,9 +23,9 @@ public class Register {
     String SIGN_URL = "http://c.tieba.baidu.com/c/c/forum/sign";
 
     /** 存储用户所关注的贴吧 */
-    private List<String> follow = new ArrayList<>();
+    private List<String> follow;
     /** 签到成功的贴吧列表 */
-    private static List<String>  success = new ArrayList<>();
+    private static List<String>  success;
     /** 用户的tbs */
     private String tbs = "";
     /** 用户所关注的贴吧数量 */
@@ -68,6 +68,7 @@ public class Register {
      * @Time 2020-10-31
      */
     public void getFollow(){
+        success = new ArrayList<>();
         try{
             JSONObject jsonObject = Request.get(LIKE_URL);
             LOGGER.info("获取贴吧列表成功");
@@ -97,6 +98,7 @@ public class Register {
     public void runSign(){
         // 当执行 5 轮所有贴吧还未签到成功就结束操作
         Integer flag = 5;
+        follow = new ArrayList<>();
         try{
             while(success.size()<followNum&&flag>0){
                 LOGGER.info("-----第 {} 轮签到开始-----", 5 - flag + 1);
